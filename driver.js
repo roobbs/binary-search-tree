@@ -17,5 +17,17 @@ newTree.insert(9);
 prettyPrint(newTree.root);
 newTree.delete(8);
 prettyPrint(newTree.root);
+console.log("Find 2")
 console.log(newTree.find(2));
+console.log("Level Order");
 console.log(newTree.levelOrder());
+console.log("Pre Order");
+console.log(newTree.preOrder());
+console.log("In Order");
+console.log(newTree.inOrder());
+console.log("Post Order");
+console.log(newTree.postOrder());
+console.log("Height");
+console.log(newTree.height());
+console.log("Depth");
+console.log(newTree.depth(1));

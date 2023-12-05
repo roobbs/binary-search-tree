@@ -72,7 +72,7 @@ class Tree {
     levelOrder(callback) {
         if (this.root === null) return [];
         let queue = [this.root];
-        let orderList = [];
+        const orderList = [];
         while (queue.length > 0) {
             let current = queue.shift();
             orderList.push(current.value);
@@ -81,6 +81,48 @@ class Tree {
             if (callback) callback(current);
         }
         return orderList;
+    }
+    inOrder(callback, node = this.root, orderList = []) {
+        //left, root, right 
+        if (node === null) return;
+        this.inOrder(callback, node.left, orderList);
+        if (callback) callback(node);
+        orderList.push(node.value);
+        this.inOrder(callback, node.right, orderList);
+        return orderList;
+    }
+    preOrder(callback, node = this.root, orderList = []) {
+        //root, left, right
+        if (node === null) return;
+        if (callback) callback(node);
+        orderList.push(node.value);
+        this.preOrder(callback, node.left, orderList);
+        this.preOrder(callback, node.right, orderList);
+        return orderList;
+    }
+    postOrder(callback, node = this.root, orderList = []) {
+        //left right root
+        if (node === null) return;
+        this.postOrder(callback, node.left, orderList);
+        this.postOrder(callback, node.right, orderList);
+        if (callback) callback(node);
+        orderList.push(node.value);
+        return orderList;
+    }
+    height(node = this.root) {
+        if (node === null) return 0;
+        let left = this.height(node.left);
+        let right = this.height(node.right);
+        if (left > right) return left + 1;
+        return right + 1;
+    }
+    depth(key, node = this.root, count = 0) {
+        if (node === null) return;
+        if (key === node.value) return count;
+        if (key > node.value) {
+            return this.depth(key, node.right, count + 1);
+        }
+        return this.depth(key, node.left, count + 1);
     }
 }
 export default Tree;
