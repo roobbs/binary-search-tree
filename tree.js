@@ -124,5 +124,19 @@ class Tree {
         }
         return this.depth(key, node.left, count + 1);
     }
+    isBalance(node = this.root) {
+        if (node === null) return 0;
+        let right = this.height(node.right);
+        let left = this.height(node.left);
+        let difference = right - left;
+        if (difference === 0 || difference === 1 || difference === -1) {
+            return true;
+        }
+        return false;
+    }
+    reBalance() {
+        let array = this.levelOrder();
+        this.root = this.buildTree(array);
+    }
 }
 export default Tree;
